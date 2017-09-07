@@ -92,8 +92,9 @@ int main() {
             double psi = j[1]["psi"];
             double v = j[1]["speed"];
 
-            //vector<double> waypoints_x;
-            //vector<double> waypoints_y;
+            // recalculate the start point at t+ latency 0.1 seconds
+            px = px + v * cos(psi) * 0.1;
+            py = py + v * sin(psi) * 0.1;
 
             for(int i = 0; i < ptsx.size(); i++){
               double shift_x = ptsx[i] - px;
@@ -156,7 +157,7 @@ int main() {
             vector<double> next_x_vals;
             vector<double> next_y_vals;
 
-            for(int i = 0; i < 100; i+=5){
+            for(int i = 0; i < 100; i+=2){
               next_x_vals.push_back(i);
               next_y_vals.push_back(polyeval(coeffs, i));
             }
